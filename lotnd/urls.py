@@ -5,6 +5,7 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', 'lotnd.search.home', name='home'),
     # Examples:
     # url(r'^$', 'lotnd.views.home', name='home'),
     # url(r'^lotnd/', include('lotnd.foo.urls')),
