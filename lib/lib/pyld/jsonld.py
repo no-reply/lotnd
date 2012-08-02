@@ -850,7 +850,7 @@ class JsonLdProcessor:
             if match is None:
                 raise JsonLdError(
                     'Error while parsing N-Quads invalid quad.',
-                    'jsonld.ParseError', {'line': lineNumber})
+                    'jsonld.ParseError', {'line': line_number})
             match = match.groups()
 
             # create RDF statement
