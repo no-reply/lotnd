@@ -34,58 +34,21 @@ for thesis in theses[1:10]:
     endpoint.setReturnFormat(XML)
     thesisXML = endpoint.query().convert()
     #add the thesis to the temporary graph
-    print thesisXML
+#    print thesisXML.serialize(format='n3')
     tmpgraph = rdflib.Graph(g.store, osuNs['theses'])
     tmpgraph.parse(data=thesisXML.serialize(format='xml'))
 
-    
-    personQuery = """CONSTRUCT  { ?subject <http://www.w3.org/2004/02/skos/core#prefLabel> ?pref .
-             ?subject <http://www.w3.org/2004/02/skos/core#altLabel> ?alt .
-             ?subject <http://www.w3.org/2004/02/skos/core#hiddenLabel> ?hidden .} 
-             WHERE {{ <""" + uri + """> <http://purl.org/dc/terms/contributor> ?subject . 
-             ?subject <http://www.w3.org/2004/02/skos/core#prefLabel>  ?pref } UNION
-             { <""" + uri + """> <http://purl.org/dc/terms/contributor> ?subject . 
-             ?subject <http://www.w3.org/2004/02/skos/core#altLabel>  ?alt . } UNION
-             { <""" + uri + """> <http://purl.org/dc/terms/contributor> ?subject . 
-             ?subject <http://www.w3.org/2004/02/skos/core#hiddenLabel> ?hidden .
-             }}"""
-    endpoint.setQuery(personQuery)
-    person = endpoint.query().convert()
-    tmpgraph.parse(data=person.serialize(format='xml'))
-
-    personQuery = """CONSTRUCT  { ?subject <http://www.w3.org/2004/02/skos/core#prefLabel> ?pref .
-             ?subject <http://www.w3.org/2004/02/skos/core#altLabel> ?alt .
-             ?subject <http://www.w3.org/2004/02/skos/core#hiddenLabel> ?hidden .} 
-             WHERE {{ <""" + uri + """> <http://purl.org/dc/terms/creator> ?subject . 
-             ?subject <http://www.w3.org/2004/02/skos/core#prefLabel>  ?pref } UNION
-             { <""" + uri + """> <http://purl.org/dc/terms/contributor> ?subject . 
-             ?subject <http://www.w3.org/2004/02/skos/core#altLabel>  ?alt . } UNION
-             { <""" + uri + """> <http://purl.org/dc/terms/contributor> ?subject . 
-             ?subject <http://www.w3.org/2004/02/skos/core#hiddenLabel> ?hidden .
-             }}"""
-    endpoint.setQuery(personQuery)
-    person = endpoint.query().convert()
-    tmpgraph.parse(data=person.serialize(format='xml'))
-
-    personQuery = """CONSTRUCT  { ?subject <http://www.w3.org/2004/02/skos/core#prefLabel> ?pref .
-             ?subject <http://www.w3.org/2004/02/skos/core#altLabel> ?alt .
-             ?subject <http://www.w3.org/2004/02/skos/core#hiddenLabel> ?hidden .} 
-             WHERE {{ <""" + uri + """> <http://id.loc.gov/vocabulary/relators/ths> ?subject . 
-             ?subject <http://www.w3.org/2004/02/skos/core#prefLabel>  ?pref } UNION
-             { <""" + uri + """> <http://purl.org/dc/terms/contributor> ?subject . 
-             ?subject <http://www.w3.org/2004/02/skos/core#altLabel>  ?alt . } UNION
-             { <""" + uri + """> <http://purl.org/dc/terms/contributor> ?subject . 
-             ?subject <http://www.w3.org/2004/02/skos/core#hiddenLabel> ?hidden .
-             }}"""
-    endpoint.setQuery(personQuery)
-    person = endpoint.query().convert()
-    tmpgraph.parse(data=person.serialize(format='xml'))
+    for o in tmpgraph.objects():
+        if isinstance(o, rdflib.URIRef):
+            query = "DESCRIBE <" + o + ">"
+            endpoint.setQuery(query)
+            desc = endpoint.query().convert()
+            tmpgraph.parse(data=desc.serialize(format='xml'))
 
     j = jsonld.compact(jsonld.from_rdf(g.serialize(format='nquads')), contexts)
     outfile.write(json.dumps(j, indent=1))
     j = jsonld.frame(j, json.load(urllib2.urlopen('http://achelo.us/thesis_frame.jsonld')))
     outfile_f.write(json.dumps(j, indent=1))
-
 
 outfile.close()
 outfile_f.close()
