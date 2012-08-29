@@ -6,7 +6,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'^$', 'lotnd.search.home', name='home'),
-    url(r'^/results', 'lotnd.search.home', name='home'),
+    url(r'^results$', 'lotnd.search.results', name='results'),
     # Examples:
     # url(r'^$', 'lotnd.views.home', name='home'),
     # url(r'^lotnd/', include('lotnd.foo.urls')),

@@ -1,8 +1,10 @@
 # Django settings for lotnd project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+SETTINGS_PATH = os.getcwd()
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -111,6 +113,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(SETTINGS_PATH, 'tpl'),
 )
 
 INSTALLED_APPS = (
@@ -155,3 +158,4 @@ LOGGING = {
     }
 }
 
+ES_HOST = "localhost:9200"

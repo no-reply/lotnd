@@ -1,11 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{lang}}" lang="{{lang}}">
-  <head>
-    <title>OSU Theses and Dissertations</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
-  <body>
+{% extends "base.tpl" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
     <h1>Search Results</h1>	
-  </body>
-</html>
+    <div id='results'>
+    {% for r in results %}
+      <div class="searchHit">
+	<div class="degree">{{ r.degree.label }}</div>
+	<h4>{{ r.title }}</h4>
+
+	<span class="author">{{ r.author.name }}</span>
+	<span class="advisor">{{ r.advisor.name }}</span>		
+
+
+	<div style="height: 0; visibility:hidden;">{{ r }}</div>
+      </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+
