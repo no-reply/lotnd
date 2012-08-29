@@ -1,40 +1,53 @@
 {
    "@context": {
-      "Thesis": "http://purl.org/ontology/bibo/Thesis",
+      "thesis": "http://purl.org/ontology/bibo/Thesis",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
       "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "uri": "@id",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "frbrer": "http://iflastandards.info/ns/fr/frbr/frbrer/",
+      "frbrer:work": "http://iflastandards.info/ns/fr/frbr/frbrer/C1001",
       "title": "http://purl.org/dc/terms/title",
-      "label": "http://www.w3.org/2004/02/skos/core#PrefLabel",
+      "name": "skos:prefLabel",
+      "altLabel": "skos:altLabel",
+      "type": {
+        "@id": "rdfs:type",
+	"@type":"@id"
+        },
       "author": {
         "@id":"http://id.loc.gov/vocabulary/relators/dis",
 	"@type":"@id"
 	},
-      "author_of": {
-        "@id":"http://id.loc.gov/vocabulary/relators/disOf",
-	"@type":"@id"
-	},
       "advisor": {
         "@id":"http://id.loc.gov/vocabulary/relators/ths",
-	"@type":"@id"
+	"@type":"@id",
+	"rdfs:type": "foaf:Person"
 	},
-      "advisor_of": {
-        "@id":"http://id.loc.gov/vocabulary/relators/thsOf",
-	"@type":"@id"
-	},
-      "committe_member": {  
+      "committee_member": {  
         "@id":"http://purl.org/dc/terms/contributor",
-	"@type":"@id"
+	"@type":"@id",
+	"rdfs:type": "foaf:Person"
 	},
+      "abstract": {
+        "@id":"http://purl.org/ontology/bibo/abstract"
+        },     
+      "degree": {
+        "@id":"http://purl.org/ontology/bibo/degree",
+	"@type":"@id"
+        },	
       "degree_grantor": {  
         "@id":"http://id.loc.gov/vocabulary/relators/dgg",
 	"@type":"@id"
-	}
-   },	
+        }
+   },
 
-  "@id": "Thesis",
-  "@id":"author",
-  "@id":"http://purl.org/ontology/bibo/degree",
-  "@id":"degree_grantor",
+  "rdfs:type": "Thesis",
+  "@id": "author",
+  "@id":"degree",
+  "@id":"advisor",
   "@id":"committee_member",
+  "@id":"degree_grantor",
   "@id":"http://purl.org/dc/terms/creator"
 }
 	
