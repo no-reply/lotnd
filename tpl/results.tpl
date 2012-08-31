@@ -18,5 +18,8 @@
       </div>
     {% endfor %}
     </div>
+    {{ results }}
+    <br/>
+    {{ facets }}
 {% endblock %}
 
