@@ -31,7 +31,7 @@ except urllib2.URLError:
     print 'could not resolve context URIs. using local contexts.'
     contexts.append(open('thesis.jsonld', 'r'))
 
-for thesis in theses[0:1000]:
+for thesis in theses:
     count += 1
     g = rdflib.ConjunctiveGraph()
     #theses = rdflib.Graph(g.store, osuNs.theses) #reset graph
