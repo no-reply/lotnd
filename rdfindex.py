@@ -1,4 +1,5 @@
 import os, sys, json
+import json
 import rdflib
 import urllib2
 sys.path.append(os.path.join(os.path.dirname(__file__), 'lib', 'lib'))
@@ -11,10 +12,12 @@ endpoint.setReturnFormat(JSON)
 osuNs = rdflib.Namespace('http://data.library.oregonstate.edu/G/')
 outfile = open('theses.json', 'w')
 outfile_f = open('theses_f.json', 'w')
+mapping = json.loads(open('thesis.mapping.json', 'r').read())
 
 elastic = ES('http://data.library.oregonstate.edu:9200')
 elastic.delete_index_if_exists('theses')
 elastic.create_index('theses')
+elastic.put_mapping('thesis', {'properties':mapping}, ['theses'])
 
 # get list of theses
 listQuery = "SELECT ?thesis WHERE { ?thesis <http://www.w3.org/2000/01/rdf-schema#type> <http://purl.org/ontology/bibo/Thesis> . }"
