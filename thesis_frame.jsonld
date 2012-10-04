@@ -1,10 +1,14 @@
 {
    "@context": {
+      "bibo:": "http://purl.org/ontology/bibo/",
       "thesis": "http://purl.org/ontology/bibo/Thesis",
       "skos": "http://www.w3.org/2004/02/skos/core#",
       "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "label": "http://www.w3.org/2000/01/rdf-schema#label",
       "xsd": "http://www.w3.org/2001/XMLSchema#",
       "uri": "@id",
+      "dc": "http://purl.org/dc/terms/",
       "foaf": "http://xmlns.com/foaf/0.1/",
       "frbrer": "http://iflastandards.info/ns/fr/frbr/frbrer/",
       "frbrer:work": "http://iflastandards.info/ns/fr/frbr/frbrer/C1001",
@@ -12,22 +16,23 @@
       "name": "skos:prefLabel",
       "altLabel": "skos:altLabel",
       "type": {
-        "@id": "rdfs:type",
+        "@id": "rdf:type",
 	"@type":"@id"
         },
       "author": {
         "@id":"http://id.loc.gov/vocabulary/relators/dis",
-	"@type":"@id"
+	"@type":"@id",
+	"type": "foaf:Person"
 	},
       "advisor": {
         "@id":"http://id.loc.gov/vocabulary/relators/ths",
 	"@type":"@id",
-	"rdfs:type": "foaf:Person"
+	"type": "foaf:Person"
 	},
       "committee_member": {  
         "@id":"http://purl.org/dc/terms/contributor",
 	"@type":"@id",
-	"rdfs:type": "foaf:Person"
+	"type": "foaf:Person"
 	},
       "abstract": {
         "@id":"http://purl.org/ontology/bibo/abstract"
@@ -35,19 +40,20 @@
       "degree": {
         "@id":"http://purl.org/ontology/bibo/degree",
 	"@type":"@id"
-        },	
+        },
       "degree_grantor": {  
         "@id":"http://id.loc.gov/vocabulary/relators/dgg",
 	"@type":"@id"
         }
    },
 
-  "rdfs:type": "Thesis",
-  "@id": "author",
+  "@type": "thesis",
+  "@id":"author",
   "@id":"degree",
   "@id":"advisor",
-  "@id":"committee_member",
+  "@id":"committeemember",
   "@id":"degree_grantor",
-  "@id":"http://purl.org/dc/terms/creator"
+  "@id":"dc:creator"
+
 }
 	
